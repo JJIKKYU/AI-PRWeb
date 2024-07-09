@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { SurveyWrapper, OptionLabel, SurveyTitle, BottomButtonWrapper } from '../Style/SurveyStyle';
+import { GradientText } from '../Style/GlobalStyle';
 
 const surveyOptions = [
-  '옵션 1',
-  '옵션 2',
-  '옵션 3',
-  '옵션 4',
-  '옵션 5',
-  '옵션 6',
-  '옵션 7',
+  '뉴스 ・ 시사',
+  'IT ･ 테크',
+  '부동산 ･ 경제',
+  '건강 ･ 생활',
+  '엔터테인먼트',
+  '쇼핑 ･ 브랜드',
+  '스포츠 ･ 게임',
+  '문화 ･ 예술',
+  '커뮤니티'
 ];
 
-const SurveyWrapper = styled.div`
-  padding: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-`;
-
-const OptionLabel = styled.label`
-  display: block;
-  margin-bottom: 10px;
-`;
+ // '핵심 정보'만 그라데이션 텍스트로 표시합니다.
+ const surveyTitle = (
+  <>
+  <GradientText>특별히 보고싶은 정보</GradientText>가 있다면 말씀해주세요
+  </>
+  );
 
 const Survey = ({ onSubmit, onPreviousStep, surveyData }) => {
   const [selectedOptions, setSelectedOptions] = useState(surveyData.selectedOptions);
@@ -47,26 +46,28 @@ const Survey = ({ onSubmit, onPreviousStep, surveyData }) => {
 
   return (
     <SurveyWrapper>
+      <SurveyTitle>{surveyTitle}</SurveyTitle>
       <form onSubmit={handleSubmit}>
-        <fieldset>
-          <legend>원하는 항목을 선택하세요 (중복 선택 가능)</legend>
-          {surveyOptions.map((option) => (
-            <OptionLabel key={option}>
-              <input
-                type="checkbox"
-                checked={selectedOptions.includes(option)}
-                onChange={() => handleChange(option)}
-              />
-              {option}
-            </OptionLabel>
-          ))}
-          <OptionLabel>
-            직접 입력:
-            <input type="text" value={customOption} onChange={handleCustomChange} />
+        {surveyOptions.map((option) => (
+          <OptionLabel key={option}>
+            {option}
+            <input
+              type="checkbox"
+              checked={selectedOptions.includes(option)}
+              onChange={() => handleChange(option)}
+            />
+            <span className="custom-checkbox"></span>
           </OptionLabel>
-        </fieldset>
-        <button type="button" onClick={onPreviousStep}>뒤로가기</button>
-        <button type="submit">설문조사 완료</button>
+        ))}
+        <OptionLabel>
+          직접 입력:
+          <input type="text" value={customOption} onChange={handleCustomChange} />
+        </OptionLabel>
+        {/* <button type="button" onClick={onPreviousStep}>뒤로가기</button> */}
+        {/* <button type="submit">설문조사 완료</button> */}
+        <BottomButtonWrapper>
+            <button type="submit">선택 완료</button>
+        </BottomButtonWrapper>
       </form>
     </SurveyWrapper>
   );

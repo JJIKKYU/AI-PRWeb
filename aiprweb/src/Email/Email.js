@@ -1,42 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { MailTipUl, MailTipLi, FormWrapper, EmailTitle, EmailInput, BottomButtonWrapper } from '../Style/EmailStyle';
+import { GradientText } from '../Style/GlobalStyle';
 
-const FrequencyEmails = [
-  '@naver.com',
-  '@gmail.com',
-  '@daum.net',
-  '@hanmail.net',
-  '@yahoo.com',
-  '@outlook.com',
-  '@nate.com',
-  '@kakao.com',
-];
-
-const MailTipUl = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  background: white;
-  border: 1px solid #ccc;
-  width: calc(100% - 20px);
-  z-index: 1000;
-  top: 50px;
-  left: 10px;
-  max-height: 150px;
-  overflow-y: auto;
-`;
-
-const MailTipLi = styled.li`
-  padding: 8px;
-  background-color: ${({ selected }) => (selected ? '#f5f5f5' : '')};
-  color: ${({ selected }) => (selected ? 'var(--zu--m4-color)' : '')};
-  cursor: pointer;
-`;
-
-const FormWrapper = styled.div`
-  position: relative;
-`;
 
 const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
   const [input, setInput] = useState(email);
@@ -44,6 +10,25 @@ const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
   const [emailList, setEmailList] = useState([]);
   const [selected, setSelected] = useState(-1);
   const inputRef = useRef(null);
+
+  const FrequencyEmails = [
+    '@naver.com',
+    '@gmail.com',
+    '@daum.net',
+    '@hanmail.net',
+    '@yahoo.com',
+    '@outlook.com',
+    '@nate.com',
+    '@kakao.com',
+];
+
+ // '핵심 정보'만 그라데이션 텍스트로 표시합니다.
+ const emailTitle = (
+  <>
+    <GradientText>핵심 정보</GradientText> 배달이 준비되면 이메일로 알려드릴게요!
+  </>
+  );
+
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -111,15 +96,17 @@ const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
 
   return (
     <FormWrapper ref={inputRef}>
+      <EmailTitle>{emailTitle}</EmailTitle>
       <form onSubmit={handleSubmit}>
         <label>
-          이메일:
-          <input
-            type="email"
-            value={input}
-            onChange={onChangeEmail}
-            onKeyUp={handleKeyUp}
-            required
+          <EmailInput
+              type="email"
+              value={input}
+              placeholder='이메일 주소'
+              onChange={onChangeEmail}
+              onKeyUp={handleKeyUp}
+              required
+              ref={inputRef} // ref를 input에 추가합니다.
           />
           {isDropbox && (
             <MailTipUl>
@@ -135,8 +122,11 @@ const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
             </MailTipUl>
           )}
         </label>
-        <button type="button" onClick={onPreviousStep}>뒤로가기</button>
-        <button type="submit">다음</button>
+        {/* <button type="button" onClick={onPreviousStep}>뒤로가기</button> */}
+        <BottomButtonWrapper>
+            <h3>입력하신 메일 주소는 안내 발송 목적으로만 사용됩니다.</h3>
+            <button type="submit">핵심 정보 배달받기</button>
+        </BottomButtonWrapper>
       </form>
     </FormWrapper>
   );

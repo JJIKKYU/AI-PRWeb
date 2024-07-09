@@ -3,18 +3,9 @@ import styled from 'styled-components';
 import Home from './Home/Home';
 import Email from './Email/Email';
 import Survey from './Survey/Survey';
-import GlobalStyle from './Style/GlobalStyle';
+import { AppWrapper, GlobalStyle } from './Style/GlobalStyle';
 import { db, serverTimestamp } from './Firebase/Firebase'; // firebase를 import 합니다.
 import { collection, addDoc, query, getDocs } from 'firebase/firestore';
-
-const AppWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f9f9f9;
-`;
 
 function App() {
   const [step, setStep] = useState(1);
@@ -41,9 +32,13 @@ function App() {
   };
 
   return (
+    // <GlobalStyle></GlobalStyle>>
     <AppWrapper>
-      <GlobalStyle />
-      {step === 1 && <Home onNextStep={handleNextStep} />}
+      {step === 1 && (
+        <Home
+          onNextStep={handleNextStep}
+        />
+      )}
       {step === 2 && (
         <Email
           onNextStep={handleNextStep}
