@@ -23,6 +23,7 @@ export const AppWrapper = styled.div`
   /* padding-left: 30px; */
   padding-top: 30px;
   /* padding-right: 30px; */
+  overflow: auto;
 `;
 
 export const GradientText = styled.span`

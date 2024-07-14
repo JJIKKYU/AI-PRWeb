@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 export const SurveyWrapper = styled.div`
   background: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
 `;
 
 export const OptionLabel = styled.label`

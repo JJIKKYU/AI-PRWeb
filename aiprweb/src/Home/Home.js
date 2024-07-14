@@ -1,7 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { HomeWrapper, TitleGradientText, TitleText, DownArrowIcon, SiteTitleText, SiteTitleGradientText } from '../Style/HomeStyle';
-import { GradientText } from '../Style/GlobalStyle';
+import { HomeWrapper, TitleGradientText, TitleText, DownArrowIcon, SiteTitleText, SiteTitleGradientText, SiteImage, WebGradientText, InfoImage, EndTitleText, EndDownArrowIcon, BottomButtonWrapper } from '../Style/HomeStyle';
 import MarqueeComponent from './components/MarqueeText';
 import CarouselComponent from './components/CarouselImage';
 
@@ -9,6 +7,13 @@ import CarouselComponent from './components/CarouselImage';
  const siteTitle = (
   <>
   원하는 <SiteTitleGradientText>사이트 주소 하나</SiteTitleGradientText>면<br/> 핵심만 정리해서 배달해드려요!
+  </>
+  );
+
+   // '배달받는 요약정보'만 그라데이션 텍스트로 표시합니다.
+ const endTittle = (
+  <>
+  직접 접속할 필요 없이<br/> <SiteTitleGradientText>배달받는 요약정보</SiteTitleGradientText>면<br/> 지금 신청하세요!
   </>
   );
 
@@ -20,8 +25,15 @@ const Home = ({ onNextStep }) => (
     <DownArrowIcon></DownArrowIcon>
     <CarouselComponent></CarouselComponent>
     <SiteTitleText>{siteTitle}</SiteTitleText>
-    <h1>사전 신청하기</h1>
-    <button onClick={onNextStep}>사전 신청하기</button>
+    <SiteImage></SiteImage>
+    <WebGradientText>웹에서 헤매지 마세요</WebGradientText>
+    <TitleText>지쳐가는 당신이<br/>뒤처지지 않도록</TitleText>
+    <InfoImage></InfoImage>
+    <EndTitleText>{endTittle}</EndTitleText>
+    <EndDownArrowIcon></EndDownArrowIcon>
+    <BottomButtonWrapper>
+          <button type="submit" onClick={onNextStep}>사전 신청하기</button>
+    </BottomButtonWrapper>
   </HomeWrapper>
 );
 

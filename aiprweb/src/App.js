@@ -3,22 +3,18 @@ import styled from 'styled-components';
 import Home from './Home/Home';
 import Email from './Email/Email';
 import Survey from './Survey/Survey';
+import Finish from './Finish/Finish';
 import { AppWrapper, GlobalStyle } from './Style/GlobalStyle';
 import { db, serverTimestamp } from './Firebase/Firebase'; // firebase를 import 합니다.
-import { collection, addDoc, query, getDocs } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 function App() {
-  const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const [surveyData, setSurveyData] = useState({ selectedOptions: [], customOption: '' });
 
-  const handleNextStep = () => setStep(step + 1);
-  const handlePreviousStep = () => setStep(step - 1);
-
   const handleSurveySubmit = async (data) => {
     setSurveyData(data);
-    setStep(4);
-
     try {
       await addDoc(collection(db, 'surveys'), {
         email: email,
@@ -26,36 +22,40 @@ function App() {
         timestamp: serverTimestamp()
       });
       console.log('Survey successfully submitted!');
+      // 페이지 이동
+      window.location.href = '/finish'; 
     } catch (error) {
       console.error('Error writing document: ', error);
     }
   };
 
   return (
-    // <GlobalStyle></GlobalStyle>>
-    <AppWrapper>
-      {step === 1 && (
-        <Home
-          onNextStep={handleNextStep}
-        />
-      )}
-      {step === 2 && (
-        <Email
-          onNextStep={handleNextStep}
-          onPreviousStep={handlePreviousStep}
-          email={email}
-          setEmail={setEmail}
-        />
-      )}
-      {step === 3 && (
-        <Survey
-          onSubmit={handleSurveySubmit}
-          onPreviousStep={handlePreviousStep}
-          surveyData={surveyData}
-        />
-      )}
-      {step === 4 && <div>설문조사 완료</div>}
-    </AppWrapper>
+    <Router>
+      <AppWrapper>
+        <GlobalStyle/>
+        <Switch>
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={() => <Home onNextStep={() => window.location.href = `${process.env.PUBLIC_URL}/email`} />} />
+          <Route 
+            path='/email'
+            component={() => <Email 
+              onNextStep={() => window.location.href = '/survey'} 
+              onPreviousStep={() => window.location.href = '/'} 
+              email={email} 
+              setEmail={setEmail} 
+            />} 
+          />
+          <Route 
+            exact path={`${process.env.PUBLIC_URL}/survey`} 
+            component={() => <Survey 
+              onSubmit={handleSurveySubmit} 
+              onPreviousStep={() => window.location.href = '/email'} 
+              surveyData={surveyData} 
+            />} 
+          />
+          <Route exact path="/finish" component={Finish} />
+        </Switch>
+      </AppWrapper>
+    </Router>
   );
 }
 

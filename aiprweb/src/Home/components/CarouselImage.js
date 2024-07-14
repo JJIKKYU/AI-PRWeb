@@ -21,7 +21,7 @@ const CarouselWrapper = styled.div`
   align-items: center;
   margin: 0 auto;
   margin-top: 10px;
-  background: url(${process.env.PUBLIC_URL + '/images/background-1.png'}) no-repeat center center;
+  background: url(${process.env.PUBLIC_URL} + '/images/background-1.png') no-repeat center center;
   background-size: contain; /* Fit the image to cover the div */
   background-position: center center; /* Center the background image */
   object-fit: contain; /* Ensure the background image scales to fit */
@@ -46,10 +46,38 @@ const images = [
   `${process.env.PUBLIC_URL}/images/card_4.png`,
   `${process.env.PUBLIC_URL}/images/card_5.png`,
   `${process.env.PUBLIC_URL}/images/card_6.png`,
+  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_1.png`,
+  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_2.png`
+  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_3.png`
+  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_4.png`
+  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_5.png`
+  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_6.png`
 ];
+
+const LeftGradientContainer = styled.div`
+  width: 100px;
+  height: 100%;
+  color: black;
+  background: linear-gradient(90deg, rgba(31, 35, 47, 1) 0%, rgba(31, 35, 47, 0) 90%);
+  position: absolute;
+  left: 0;
+  z-index: 1;
+`;
+
+const RightGradientContainer = styled.div`
+  width: 100px;
+  height: 100%;
+  color: black;
+  background: linear-gradient(90deg, rgba(31, 35, 47, 0) 10%, rgba(31, 35, 47, 1) 100%);
+  position: absolute;
+  right: 0;
+  z-index: 1;
+`;
 
 const CarouselComponent = () => (
   <CarouselWrapper>
+    <LeftGradientContainer/>
+    <RightGradientContainer/>
     <CarouselContainer>
       {/* 이미지 반복 */}
       {images.concat(images).map((src, index) => (
