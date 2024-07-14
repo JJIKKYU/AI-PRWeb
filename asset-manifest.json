@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/AI-PRWeb/static/css/main.c9e46803.css",
-    "main.js": "/AI-PRWeb/static/js/main.18079c36.js",
+    "main.js": "/AI-PRWeb/static/js/main.eb20ca68.js",
     "static/js/453.d895434d.chunk.js": "/AI-PRWeb/static/js/453.d895434d.chunk.js",
     "index.html": "/AI-PRWeb/index.html",
     "main.c9e46803.css.map": "/AI-PRWeb/static/css/main.c9e46803.css.map",
-    "main.18079c36.js.map": "/AI-PRWeb/static/js/main.18079c36.js.map",
+    "main.eb20ca68.js.map": "/AI-PRWeb/static/js/main.eb20ca68.js.map",
     "453.d895434d.chunk.js.map": "/AI-PRWeb/static/js/453.d895434d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c9e46803.css",
-    "static/js/main.18079c36.js"
+    "static/js/main.eb20ca68.js"
   ]
 }
