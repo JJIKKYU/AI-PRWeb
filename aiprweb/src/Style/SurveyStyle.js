@@ -152,7 +152,7 @@ export const BottomButtonWrapper = styled.div`
         }
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 640px) {
         width: 390px;
         margin: 0 auto;
     }

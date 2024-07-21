@@ -15,7 +15,7 @@ export const HomeWrapper = styled.div`
   /* margin: 0 auto; */
   /* width: 100%; */
 
-  @media (min-width: 1024px) {
+  @media (min-width: 640px) {
     width: 390px;
     margin: 0 auto;
     padding-bottom: 100px;
@@ -157,7 +157,7 @@ export const BottomButtonWrapper = styled.div`
         }
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 640px) {
       width: 390px;
       margin: 0 auto;
       margin-bottom: 20px;

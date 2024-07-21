@@ -71,12 +71,13 @@ const MarqueeText = styled.span`
 `;
 
 const images = [
-  'www.work24.go.kr',
-  'news.naver.com/home',
-  'medium.com',
-  'programmers.co.kr',
-  'hogangnono.com',
-  'www.innoforest.co.kr',
+  'techcrunch.com',
+  'zdnet.com',
+  'nngroup.com',
+  'dev.to',
+  'gartner.com',
+  'github.com/trending',
+  'wired.com',
 ];
 
 const MarqueeComponent = () => (

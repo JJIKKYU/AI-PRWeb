@@ -5,30 +5,30 @@ import Email from './Email/Email';
 import Survey from './Survey/Survey';
 import Finish from './Finish/Finish';
 import { AppWrapper, GlobalStyle } from './Style/GlobalStyle';
-import { db, serverTimestamp } from './Firebase/Firebase'; // firebase를 import 합니다.
-import { collection, addDoc, query, getDocs } from 'firebase/firestore';
+import { db, serverTimestamp, analytics } from './Firebase/Firebase';
+import { collection, addDoc } from 'firebase/firestore';
 import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import i18n from './i18n';  // i18n 설정 파일을 임포트합니다.
+import i18n from './i18n';
 import { LanguageProvider } from './Contexts/LanguageContext';
+import { logEvent } from 'firebase/analytics';
 
 function App() {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const [surveyData, setSurveyData] = useState({ selectedOptions: [], customOption: '' });
-  const navigate = useNavigate(); // useNavigate 훅을 호출합니다.
-
-  const handleNextStep = () => setStep(step + 1);
-  const handlePreviousStep = () => setStep(step - 1);
+  const [utmData, setUtmData] = useState({});
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const currentLanguage = i18n.language;
 
+  const handleNextStep = () => setStep(step + 1);
+  const handlePreviousStep = () => setStep(step - 1);
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const lang = params.get('lang');
-
-    // 영미권 국가 언어 설정
     const englishSpeakingLanguages = ['en', 'us', 'gb', 'ca', 'au', 'nz'];
 
     if (lang && englishSpeakingLanguages.includes(lang.toLowerCase())) {
@@ -52,6 +52,30 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {  
+    // UTM 파라미터 처리
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get('utm_source');
+    const utmMedium = params.get('utm_medium');
+    const utmCampaign = params.get('utm_campaign');
+    const utmCountry = params.get('utm_country');
+    console.log(params.get('utm_source'));
+    console.log(params.get('utm_medium'));
+    console.log(params.get('utm_campaign'));
+  
+    const utmData = {
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCampaign,
+      utm_country: utmCountry
+    };
+    setUtmData(utmData);
+  
+    if (utmSource || utmMedium || utmCampaign) {
+      logEvent(analytics, 'dynamic_link', utmData);
+    }
+  }, []);
+
   const handleSurveySubmit = async (data) => {
     setSurveyData(data);
     setStep(4);
@@ -60,6 +84,7 @@ function App() {
       await addDoc(collection(db, 'surveys'), {
         email: email,
         ...data,
+        ...utmData, // UTM 정보 추가
         timestamp: serverTimestamp()
       });
       console.log('Survey successfully submitted!');
@@ -72,25 +97,25 @@ function App() {
   return (
     <LanguageProvider>
       <AppWrapper className="app-wrapper">
-        <GlobalStyle/>
+        <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home onNextStep={() => navigate(`/email?lang=${currentLanguage}`)} />} />
-          <Route 
-            path="/email" 
-            element={<Email 
-              onNextStep={() => navigate(`/survey?lang=${currentLanguage}`)} 
-              onPreviousStep={() => navigate(`/?lang=${currentLanguage}`)} 
-              email={email} 
-              setEmail={setEmail} 
-            />} 
+          <Route
+            path="/email"
+            element={<Email
+              onNextStep={() => navigate(`/survey?lang=${currentLanguage}`)}
+              onPreviousStep={() => navigate(`/?lang=${currentLanguage}`)}
+              email={email}
+              setEmail={setEmail}
+            />}
           />
-          <Route 
-            path="/survey" 
-            element={<Survey 
-              onSubmit={handleSurveySubmit} // handleSurveySubmit 함수 연결
-              onPreviousStep={() => navigate(`/email?lang=${currentLanguage}`)} 
-              surveyData={surveyData} 
-            />} 
+          <Route
+            path="/survey"
+            element={<Survey
+              onSubmit={handleSurveySubmit}
+              onPreviousStep={() => navigate(`/email?lang=${currentLanguage}`)}
+              surveyData={surveyData}
+            />}
           />
           <Route path="/finish" element={<Finish />} />
         </Routes>

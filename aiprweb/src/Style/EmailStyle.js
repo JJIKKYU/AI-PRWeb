@@ -41,9 +41,10 @@ export const FormWrapper = styled.div`
     /* height: 20px;
     background-color: blue; */
 
-    @media (min-width: 1024px) {
+    @media (min-width: 640px) {
         width: 390px;
         margin: 0 auto;
+        height: 100vh;
     }
 `;
 
@@ -68,6 +69,10 @@ export const EmailInput = styled.input`
     border-bottom: 1px #7B8A9E solid;
     padding-bottom: 12px;
     color: white;
+    -webkit-appearance: none; /* iOS 기본 스타일 제거 */
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
 
     &:focus {
         border-color: #479DE9;
@@ -79,10 +84,22 @@ export const EmailInput = styled.input`
         color: #687487;
         font-size: 20px;
     }
+
+    /* 사파리 브라우저를 위한 예외 처리 */
+    @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+        &.safari-only {
+            border-bottom: 1px solid #007aff; /* 사파리에서 적용할 스타일 */
+        }
+
+        &:focus.safari-only {
+            border-color: #007aff;
+            box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+        }
+    }
 `;
 
 export const BottomButtonWrapper = styled.div`
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     left: 0;
     right: 0;
@@ -127,7 +144,7 @@ export const BottomButtonWrapper = styled.div`
         }
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 640px) {
         width: 390px;
         margin: 0 auto;
     }

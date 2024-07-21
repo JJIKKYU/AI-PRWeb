@@ -8,10 +8,9 @@ export const FinishWrapper = styled.div`
   align-content: center;
   height: calc(100vh - 30px - 96px);
 
-  @media (min-width: 1024px) {
+  @media (min-width: 640px) {
     width: 390px;
     margin: 0 auto;
-    height: 100%;
   }
 `;
 
@@ -98,7 +97,7 @@ export const BottomButtonWrapper = styled.div`
         }
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 640px) {
       width: 390px;
       margin: 0 auto;
     }

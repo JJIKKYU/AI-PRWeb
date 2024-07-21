@@ -72,14 +72,16 @@ const CarouselComponent = () => {
         `${process.env.PUBLIC_URL}/images/en_card_4.png`,
         `${process.env.PUBLIC_URL}/images/en_card_5.png`,
         `${process.env.PUBLIC_URL}/images/en_card_6.png`,
+        `${process.env.PUBLIC_URL}/images/en_card_6.png`,
       ]
     : [
-        `${process.env.PUBLIC_URL}/images/card_1.png`,
-        `${process.env.PUBLIC_URL}/images/card_2.png`,
-        `${process.env.PUBLIC_URL}/images/card_3.png`,
-        `${process.env.PUBLIC_URL}/images/card_4.png`,
-        `${process.env.PUBLIC_URL}/images/card_5.png`,
-        `${process.env.PUBLIC_URL}/images/card_6.png`,
+        `${process.env.PUBLIC_URL}/images/card-0.png`,
+        `${process.env.PUBLIC_URL}/images/card-1.png`,
+        `${process.env.PUBLIC_URL}/images/card-2.png`,
+        `${process.env.PUBLIC_URL}/images/card-3.png`,
+        `${process.env.PUBLIC_URL}/images/card-4.png`,
+        `${process.env.PUBLIC_URL}/images/card-5.png`,
+        `${process.env.PUBLIC_URL}/images/card-6.png`,
       ];
 
   return (
