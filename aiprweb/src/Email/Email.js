@@ -1,15 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { MailTipUl, MailTipLi, FormWrapper, EmailTitle, EmailInput, BottomButtonWrapper } from '../Style/EmailStyle';
 import { GradientText } from '../Style/GlobalStyle';
-
+import { useTranslation, Trans } from 'react-i18next';
+import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 
 const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
+  const { t } = useTranslation();
   const [input, setInput] = useState(email);
   const [isDropbox, setIsDropbox] = useState(false);
   const [emailList, setEmailList] = useState([]);
   const [selected, setSelected] = useState(-1);
+
   const inputRef = useRef(null);
+  const formRef = useRef(null);
 
   const FrequencyEmails = [
     '@naver.com',
@@ -20,28 +24,11 @@ const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
     '@outlook.com',
     '@nate.com',
     '@kakao.com',
-];
+  ];
 
- // '핵심 정보'만 그라데이션 텍스트로 표시합니다.
- const emailTitle = (
-  <>
-    <GradientText>핵심 정보</GradientText> 배달이 준비되면 이메일로 알려드릴게요!
-  </>
+  const emailTitle = (
+    <Trans i18nKey="emailForm.emailTitle" components={{ 1: <GradientText /> }} />
   );
-
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (inputRef.current && !inputRef.current.contains(e.target)) {
-        setIsDropbox(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [inputRef]);
 
   const onChangeEmail = (e) => {
     const value = e.target.value;
@@ -75,6 +62,16 @@ const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
     setSelected(-1);
   };
 
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+  
+    return null;
+  };
+
   const handleKeyUp = (e) => {
     if (isDropbox) {
       if (e.key === 'ArrowDown' && emailList.length - 1 > selected) {
@@ -94,19 +91,36 @@ const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
     onNextStep();
   };
 
+  useEffect(() => {
+    const input = inputRef.current;
+    if (input) {
+      const handleFocus = () => disableBodyScroll(formRef.current);
+      const handleBlur = () => enableBodyScroll(formRef.current);
+
+      input.addEventListener('focus', handleFocus);
+      input.addEventListener('blur', handleBlur);
+
+      return () => {
+        input.removeEventListener('focus', handleFocus);
+        input.removeEventListener('blur', handleBlur);
+      };
+    }
+  }, []);
+
   return (
-    <FormWrapper ref={inputRef}>
+    <FormWrapper ref={formRef}>
+      <ScrollToTop />
       <EmailTitle>{emailTitle}</EmailTitle>
       <form onSubmit={handleSubmit}>
         <label>
           <EmailInput
-              type="email"
-              value={input}
-              placeholder='이메일 주소'
-              onChange={onChangeEmail}
-              onKeyUp={handleKeyUp}
-              required
-              ref={inputRef} // ref를 input에 추가합니다.
+            type="email"
+            value={input}
+            placeholder={t('emailForm.placeholder')}
+            onChange={onChangeEmail}
+            onKeyUp={handleKeyUp}
+            required
+            ref={inputRef}
           />
           {isDropbox && (
             <MailTipUl>
@@ -122,10 +136,9 @@ const EmailForm = ({ onNextStep, onPreviousStep, email, setEmail }) => {
             </MailTipUl>
           )}
         </label>
-        {/* <button type="button" onClick={onPreviousStep}>뒤로가기</button> */}
         <BottomButtonWrapper>
-            <h3>입력하신 메일 주소는 안내 발송 목적으로만 사용됩니다.</h3>
-            <button type="submit">핵심 정보 배달받기</button>
+          <h3>{t('emailForm.infoText')}</h3>
+          <button type="submit">{t('emailForm.submitButton')}</button>
         </BottomButtonWrapper>
       </form>
     </FormWrapper>

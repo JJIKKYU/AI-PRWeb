@@ -5,11 +5,20 @@ export const HomeWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: auto;
-  /* padding: 20px; */
+  position: relative;
+  /* overflow: auto; */
+  /* margin-top: 44px; */
+  padding-top: 44px;
+  /* padding-bottom: 200px; */
+  /* margin-bottom: 100px; */
+  padding-bottom: 100px;
+  /* margin: 0 auto; */
+  /* width: 100%; */
 
-  @media (min-width: 391px) {
+  @media (min-width: 1024px) {
     width: 390px;
+    margin: 0 auto;
+    padding-bottom: 100px;
   }
 `;
 
@@ -24,7 +33,9 @@ export const TitleGradientText = styled.span`
 export const TitleText = styled.span`
     text-align: center;
     font-weight: bold; /* 선택사항, 텍스트를 강조하려면 bold */
-    font-size: 36px; /* 선택사항, 텍스트 크기 조절 */
+    font-size: 32px; /* 선택사항, 텍스트 크기 조절 */
+    margin-left: 10px;
+    margin-right: 10px;
     color: white;
     margin-top: 10px;
 `;
@@ -81,6 +92,7 @@ export const InfoImage = styled.div`
   width: calc(100% - 44px); /* 부모 요소의 너비에서 좌우 여백을 뺀 값 */
   margin-top: 51px;
   background: url(${process.env.PUBLIC_URL + '/images/info.png'}) no-repeat center center;
+  background: url(${props => props.bgImage}) no-repeat center center;
   background-size: contain; /* or cover, 100% 100%, etc. */
 `;
 
@@ -97,7 +109,6 @@ export const EndDownArrowIcon = styled.div`
   width: 8px;
   height: 28px;
   margin-top: 24px;
-  margin-bottom: 100px;
   background: url(${process.env.PUBLIC_URL + '/icons/down-arrow2.png'}) no-repeat center center;
   background-size: cover;
   color: white;
@@ -106,28 +117,22 @@ export const EndDownArrowIcon = styled.div`
 export const BottomButtonWrapper = styled.div`
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 20px;
+    right: 20px;
     background: linear-gradient(0deg, rgba(31, 35, 47, 1) 0%, rgba(31, 35, 47, 0) 100%);
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
-    /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 0px;
-    margin-right: 0px;
     flex-direction: column;
     gap: 12px;
+    z-index: 9;
+    margin-bottom: 20px;
+    pointer-events: none; /* 포인터 이벤트 비활성화 */
 
     h3 {
         margin: 0;
         font-size: 12px;
         color: #D1D1D1;
         text-align: center;
-    }
+      }
 
     button {
         width: 100%;
@@ -140,6 +145,8 @@ export const BottomButtonWrapper = styled.div`
         color: white;
         cursor: pointer;
         outline: none;
+        box-shadow: 0 2px 20px rgba(0, 108, 255, 0.3);
+        pointer-events: auto; /* 포인터 이벤트 활성화 */
 
         &:hover {
             background-color: #377bb5;
@@ -148,5 +155,11 @@ export const BottomButtonWrapper = styled.div`
         &:active {
             background-color: #2c6391;
         }
+    }
+
+    @media (min-width: 1024px) {
+      width: 390px;
+      margin: 0 auto;
+      margin-bottom: 20px;
     }
 `;

@@ -1,0 +1,35 @@
+{
+    "desiredSite": "A smart AI will summarize<br/> articles of the site<br/> and deliver them to you.",
+    "noNeedToAccessDirectly": " Summary info delivered<br/> Without direct access<br/>Sign up today!",
+    "oneLineLink": "It takes ONLY 3sec",
+    "deliveryService": "Just enter the URL,\nINFO Delivery Service",
+    "dontWander": "Don't waste time on the WEBs.",
+    "stayUpdated": "New INFO Clarify,<br />AI help you.",
+    "preRegister": "Sign up for free (only now)",
+    "emailForm": {
+        "emailTitle": "We will notify you<br />by Email",
+        "placeholder": "Email Address",
+        "infoText": "The email address will only be used for sending announcements.",
+        "submitButton": "Complete your application"
+      },
+    "survey": {
+    "title": "<1>Particular Info</1>\nYou would Like?",
+    "options": {
+        "news": "News & Current Events",
+        "it": "IT ・ Tech",
+        "realEstate": "Real Estate ･ Economy",
+        "health": "Health ･ Life",
+        "entertainment": "Entertainment",
+        "shopping": "Shopping ・ Brand",
+        "sports": "Sports ・ Game",
+        "culture": "Culture ・ Art",
+        "community": "Community"
+    },
+    "customPlaceholder": "Custom input",
+    "submitButton": "Complete selection"
+    },
+    "finish": {
+        "siteTitle": "You can get,<br/><1>THE CORE INFO</1><br/>what you need.",
+        "confirmButton": "Confirm"
+    }
+  }

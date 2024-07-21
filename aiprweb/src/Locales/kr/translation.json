@@ -1,0 +1,35 @@
+{
+    "desiredSite": "원하는 <1>사이트 주소 하나</1>면,<br />핵심만 정리해서 배달해드려요!",
+    "noNeedToAccessDirectly": "직접 접속할 필요 없이,<br /><1>배달받는 요약정보</1>면,<br />지금 신청하세요!",
+    "oneLineLink": "링크 한 줄이면 핵심 요약",
+    "deliveryService": "언제든 원할 때 받는\n정보 배달 서비스",
+    "dontWander": "웹에서 헤매지 마세요",
+    "stayUpdated": "지쳐가는 당신이<br /> 뒤처지지 않도록",
+    "preRegister": "사전 신청하기",
+    "emailForm": {
+        "emailTitle": "<1>핵심 정보</1> 배달이 준비되면 이메일로 알려드릴게요!",
+        "placeholder": "이메일 주소",
+        "infoText": "입력하신 메일 주소는 안내 발송 목적으로만 사용됩니다.",
+        "submitButton": "핵심 정보 배달받기"
+    },
+    "survey": {
+    "title": "<1>특별히 보고싶은 정보</1>가 있다면 말씀해주세요",
+    "options": {
+        "news": "뉴스 ・ 시사",
+        "it": "IT ･ 테크",
+        "realEstate": "부동산 ･ 경제",
+        "health": "건강 ･ 생활",
+        "entertainment": "엔터테인먼트",
+        "shopping": "쇼핑 ･ 브랜드",
+        "sports": "스포츠 ･ 게임",
+        "culture": "문화 ･ 예술",
+        "community": "커뮤니티"
+    },
+    "customPlaceholder": "직접 입력",
+    "submitButton": "선택 완료"
+    },
+    "finish": {
+        "siteTitle": "감사합니다!<br/>조금만 기다려주시면,<br/><1>원하는 정보의 핵심만 쏙쏙</1><br/>배달해드릴게요!",
+        "confirmButton": "확인"
+    }
+  }

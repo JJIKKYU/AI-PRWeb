@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { LanguageContext } from '../../Contexts/LanguageContext';
 
 const carouselAnimation = keyframes`
   0%, 10% { transform: translateX(500px); }
@@ -15,7 +16,7 @@ const CarouselWrapper = styled.div`
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 250px; /* Set height as per your image height */
+  height: 200px; /* Set height as per your image height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +26,7 @@ const CarouselWrapper = styled.div`
   background-size: contain; /* Fit the image to cover the div */
   background-position: center center; /* Center the background image */
   object-fit: contain; /* Ensure the background image scales to fit */
+  margin-bottom: 20px;
 `;
 
 const CarouselContainer = styled.div`
@@ -38,21 +40,6 @@ const CarouselImage = styled.img`
   object-fit: contain;
   margin: 0 0px; /* Adjust spacing between images */
 `;
-
-const images = [
-  `${process.env.PUBLIC_URL}/images/card_1.png`,
-  `${process.env.PUBLIC_URL}/images/card_2.png`,
-  `${process.env.PUBLIC_URL}/images/card_3.png`,
-  `${process.env.PUBLIC_URL}/images/card_4.png`,
-  `${process.env.PUBLIC_URL}/images/card_5.png`,
-  `${process.env.PUBLIC_URL}/images/card_6.png`,
-  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_1.png`,
-  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_2.png`
-  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_3.png`
-  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_4.png`
-  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_5.png`
-  // `https://github.com/JJIKKYU/AI-PRWeb/blob/main/aiprweb/public/Images/card_6.png`
-];
 
 const LeftGradientContainer = styled.div`
   width: 100px;
@@ -74,20 +61,39 @@ const RightGradientContainer = styled.div`
   z-index: 1;
 `;
 
-const CarouselComponent = () => (
-  <CarouselWrapper>
-    <LeftGradientContainer/>
-    <RightGradientContainer/>
-    <CarouselContainer>
-      {/* 이미지 반복 */}
-      {images.concat(images).map((src, index) => (
-        <CarouselImage key={index} src={src} alt={`carousel image ${index + 1}`} />
-      ))}
-      {/* {images.map((src, index) => (
-        <CarouselImage key={index} src={src} alt={`carousel image ${index + 1}`} />
-      ))} */}
-    </CarouselContainer>
-  </CarouselWrapper>
-);
+const CarouselComponent = () => {
+  const language = useContext(LanguageContext);
+
+  const images = language === 'en' 
+    ? [
+        `${process.env.PUBLIC_URL}/images/en_card_1.png`,
+        `${process.env.PUBLIC_URL}/images/en_card_2.png`,
+        `${process.env.PUBLIC_URL}/images/en_card_3.png`,
+        `${process.env.PUBLIC_URL}/images/en_card_4.png`,
+        `${process.env.PUBLIC_URL}/images/en_card_5.png`,
+        `${process.env.PUBLIC_URL}/images/en_card_6.png`,
+      ]
+    : [
+        `${process.env.PUBLIC_URL}/images/card_1.png`,
+        `${process.env.PUBLIC_URL}/images/card_2.png`,
+        `${process.env.PUBLIC_URL}/images/card_3.png`,
+        `${process.env.PUBLIC_URL}/images/card_4.png`,
+        `${process.env.PUBLIC_URL}/images/card_5.png`,
+        `${process.env.PUBLIC_URL}/images/card_6.png`,
+      ];
+
+  return (
+    <CarouselWrapper>
+      <LeftGradientContainer/>
+      <RightGradientContainer/>
+      <CarouselContainer>
+        {/* 이미지 반복 */}
+        {images.concat(images).map((src, index) => (
+          <CarouselImage key={index} src={src} alt={`carousel image ${index + 1}`} />
+        ))}
+      </CarouselContainer>
+    </CarouselWrapper>
+  );
+};
 
 export default CarouselComponent;

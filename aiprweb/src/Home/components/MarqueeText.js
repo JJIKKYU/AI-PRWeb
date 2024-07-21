@@ -71,12 +71,12 @@ const MarqueeText = styled.span`
 `;
 
 const images = [
-  'https://news.google.com/home',
-  'https://news.google.com/home',
-  'https://news.google.com/home',
-  'https://news.google.com/home',
-  'https://news.google.com/home',
-  'https://news.google.com/home',
+  'www.work24.go.kr',
+  'news.naver.com/home',
+  'medium.com',
+  'programmers.co.kr',
+  'hogangnono.com',
+  'www.innoforest.co.kr',
 ];
 
 const MarqueeComponent = () => (

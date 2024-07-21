@@ -6,9 +6,12 @@ export const FinishWrapper = styled.div`
   align-items: center;
   justify-content: center;
   align-content: center;
+  height: calc(100vh - 30px - 96px);
 
-  @media (min-width: 391px) {
+  @media (min-width: 1024px) {
     width: 390px;
+    margin: 0 auto;
+    height: 100%;
   }
 `;
 
@@ -64,6 +67,7 @@ export const BottomButtonWrapper = styled.div`
     margin-right: 0px;
     flex-direction: column;
     gap: 12px;
+    z-index: 9;
 
     h3 {
         margin: 0;
@@ -83,6 +87,7 @@ export const BottomButtonWrapper = styled.div`
         color: white;
         cursor: pointer;
         outline: none;
+        box-shadow: 0 2px 20px rgba(0, 108, 255, 0.3);
 
         &:hover {
             background-color: #377bb5;
@@ -91,5 +96,10 @@ export const BottomButtonWrapper = styled.div`
         &:active {
             background-color: #2c6391;
         }
+    }
+
+    @media (min-width: 1024px) {
+      width: 390px;
+      margin: 0 auto;
     }
 `;

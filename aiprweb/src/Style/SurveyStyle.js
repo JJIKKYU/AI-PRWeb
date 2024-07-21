@@ -5,7 +5,15 @@ export const SurveyWrapper = styled.div`
   background: none;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 100px;
+  margin-bottom: 100px;
+
+  @media (min-width: 391px) {
+    width: 390px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+  }
 `;
 
 export const OptionLabel = styled.label`
@@ -13,7 +21,7 @@ export const OptionLabel = styled.label`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  background-color: #2D343E;
+  background-color: ${(props) => (props.selected ? '#404A59' : '#2D343E')}; /* selected와 unselected 배경색 설정 */
   padding: 8.5px 16px;
   border-radius: 8px;
   color: #C1C6CD;
@@ -21,8 +29,20 @@ export const OptionLabel = styled.label`
   cursor: pointer;
   transition: background-color 0.3s ease; /* 배경색 전환 효과 */
 
-  input {
+  input[type="checkbox"] {
     display: none;
+  }
+
+  input[type="text"] {
+    width: 80%;
+    border: none;
+    border-radius: 8px;
+    background-color: inherit;
+    color: #C1C6CD;
+    font-size: 18px;
+    outline: none;
+    height: 24px;
+    padding-left: 0px;
   }
 
   .custom-checkbox {
@@ -42,7 +62,7 @@ export const OptionLabel = styled.label`
       display: none;
       width: 12px;
       height: 12px;
-      background-image: url('https://www.svgrepo.com/show/532154/check.svg'); /* 로컬 URL 참조 */
+      background: url(${process.env.PUBLIC_URL + '/icons/check.png'}) no-repeat center center;
       background-size: cover; /* 아이콘 크기에 맞게 조정 */
       position: absolute;
     }
@@ -52,12 +72,13 @@ export const OptionLabel = styled.label`
     border-color: #0F8FFF; /* 선택된 상태에서의 테두리 색상 */
     background-color: #0F8FFF; /* 선택된 상태에서의 배경색 */
     border: none;
-    border: 1.5px #2D343E solid;
+    border: 1.5px #0F8FFF solid;
   }
 
   input:checked + .custom-checkbox::after {
     display: block;
   }
+
   /* input이 체크되었을 때 label의 배경색 변경 */
   input:checked + .custom-checkbox {
     background-color: #0F8FFF;
@@ -68,15 +89,16 @@ export const OptionLabel = styled.label`
   }
 `;
 
+
 export const SurveyTitle = styled.h1`
     font-size: 30px;
     color: #ffffff;
     text-align: left;
     margin-bottom: 32px;
-    word-break: normal;
     word-wrap: break-word;
     line-height: 150%;
     margin-top: 0px;
+    word-break: keep-all;
 `;
 
 export const BottomButtonWrapper = styled.div`
@@ -97,6 +119,8 @@ export const BottomButtonWrapper = styled.div`
     margin-right: 0px;
     flex-direction: column;
     gap: 12px;
+    z-index: 9;
+    // pointer-events: none; /* 포인터 이벤트 비활성화 */
 
     h3 {
         margin: 0;
@@ -116,6 +140,8 @@ export const BottomButtonWrapper = styled.div`
         color: white;
         cursor: pointer;
         outline: none;
+        box-shadow: 0 2px 20px rgba(0, 108, 255, 0.3);
+        pointer-events: auto;
 
         &:hover {
             background-color: #377bb5;
@@ -124,5 +150,10 @@ export const BottomButtonWrapper = styled.div`
         &:active {
             background-color: #2c6391;
         }
+    }
+
+    @media (min-width: 1024px) {
+        width: 390px;
+        margin: 0 auto;
     }
 `;
